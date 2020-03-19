@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <q-item clickable v-ripple v-for="pet in pets" :to="`/dogs/${pet.id}`">
+    <q-item clickable v-ripple v-for="pet in pets" :to="`dogs/${pet.id}`">
       <q-item-section avatar>
         <q-avatar rounded size="100px">
           <q-img
