@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.e246830df6497edea7ff0d3c11bf9dc8.js"
+  "precache-manifest.cc8bb662d7258f10f488a4e21d22e747.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sos-pets-client"});
