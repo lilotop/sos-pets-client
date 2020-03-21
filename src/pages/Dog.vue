@@ -6,11 +6,32 @@
                 arrows
                 navigation
                 infinite
+                v-if="dog"
     >
       <q-carousel-slide :name="i" :img-src="`statics/images/${dog.id}${i}.jpg`" v-for="i in imageIndexes"/>
     </q-carousel>
-    <q-card>
+    <q-card v-if="dog">
       <q-card-section>
+        <q-btn v-if="utils.isFavorite(dog)"
+               @click="store.removeFavoriteDog(dog)"
+               round
+               size="20px"
+               color="white"
+               text-color="red"
+               icon="favorite"
+               class="absolute"
+               style="top: 0; left: 12px; transform: translateY(-50%);"
+        />
+        <q-btn v-if="!utils.isFavorite(dog)"
+               @click="store.addFavoriteDog(dog)"
+               round
+               size="20px"
+               color="white"
+               text-color="primary"
+               icon="favorite_border"
+               class="absolute"
+               style="top: 0; left: 12px; transform: translateY(-50%);"
+        />
         <div class="text-h4">{{dog.name}}</div>
         <div>{{utils.age(dog)}}</div>
         <div>{{utils.sex(dog)}}</div>
@@ -40,20 +61,19 @@
     name: 'PageIndex',
     data() {
       return {
-        dog: {},
+        dog: null,
         slide: 1,
         imageIndexes: [1, 2, 3, 4],
-        vetStatus: {
-
-        }
+        vetStatus: {}
       }
     },
     props: {
       id: String
     },
     methods: {},
-    async mounted() {
+    async created() {
       this.utils = utils;
+      this.store = store;
       await store.loadFromServer();
       this.dog = find(store.dogs, ['id', this.id]);
 

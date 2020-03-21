@@ -7,7 +7,9 @@ import Vue from 'vue';
 // import server from "./server";
 let loaded;
 let store = Vue.observable({
+  onlyFavorites: false,
   dogs: [],
+  favoriteDogs: JSON.parse(localStorage.getItem('favoriteDogs')) || [],
   error: null,
   async loadFromServer(forceReload) {
     if (!loaded || forceReload) {
@@ -18,6 +20,14 @@ let store = Vue.observable({
       });
       loaded = true;
     }
+  },
+  addFavoriteDog(dog) {
+    this.favoriteDogs.push(dog.id);
+    localStorage.setItem('favoriteDogs', JSON.stringify(store.favoriteDogs));
+  },
+  removeFavoriteDog(dog) {
+    this.favoriteDogs.splice(this.favoriteDogs.indexOf(dog.id),1);
+    localStorage.setItem('favoriteDogs', JSON.stringify(store.favoriteDogs));
   },
 });
 export default store;
