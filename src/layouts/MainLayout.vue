@@ -8,6 +8,7 @@
         <q-toolbar-title>
           SOS חיות
         </q-toolbar-title>
+        <q-btn round flat icon="search"></q-btn>
         <q-btn round flat :text-color="onlyFavorites ? 'red':'white'" :icon="onlyFavorites ? 'favorite' : 'favorite_border'" @click="toggleFavorites()">
           <q-badge v-if="favoritesCount > 0" color="red" floating>{{favoritesCount}}</q-badge>
         </q-btn>
